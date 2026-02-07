@@ -1,70 +1,178 @@
-# Getting Started with Create React App
+📚 AI Study Planner (MVP)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+An AI-powered study planning system that intelligently allocates study time across subjects and topics based on difficulty, confidence level, and available study hours.
 
-## Available Scripts
+This project was built as an MVP (Minimum Viable Product) to demonstrate how AI-driven logic can help students plan their studies more effectively.
 
-In the project directory, you can run:
+🚀 Features
 
-### `npm start`
+📊 Subject-wise study hour allocation
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+🧠 Topic-level breakdown (strong vs weak areas)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+⏱️ Dynamic time distribution based on available weekday/weekend hours
 
-### `npm test`
+🔴 Weak-topic prioritization
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+⚡ FastAPI backend with validation
 
-### `npm run build`
+🧪 Swagger UI for easy testing
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+🛠️ Tech Stack
+Backend
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Python
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+FastAPI
 
-### `npm run eject`
+Pydantic
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Uvicorn
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Frontend (Basic MVP)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+React (Create React App)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Fetch API (for backend communication)
 
-## Learn More
+📁 Project Structure
+ai-study-planner/
+├── backend/
+│   ├── main.py
+│   ├── models.py
+│   ├── scheduler.py
+│   ├── requirements.txt
+│
+└── frontend/
+    ├── public/
+    ├── src/
+    │   ├── App.js
+    │   ├── StudyPlanner.js
+    │   ├── index.js
+    │   └── index.css
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+⚙️ How It Works
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+User Input
 
-### Code Splitting
+Student details
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Subjects with:
 
-### Analyzing the Bundle Size
+credits
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+confidence level
 
-### Making a Progressive Web App
+strong topics
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+weak topics
 
-### Advanced Configuration
+Available study hours (weekday + weekend)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Backend Logic
 
-### Deployment
+Calculates total weekly study hours
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Distributes hours evenly across subjects
 
-### `npm run build` fails to minify
+Allocates:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+60% time to weak topics
+
+40% time to strong topics
+
+Output
+
+Weekly study plan
+
+Topic-level hour breakdown
+
+Weak topics are clearly highlighted
+
+🧪 API Usage
+Endpoint
+POST /generate-plan
+
+Sample Request
+{
+  "name": "Aman",
+  "college": "XYZ Institute of Technology",
+  "branch": "CSE",
+  "graduation_year": 2026,
+  "email": "aman@example.com",
+  "subjects": [
+    {
+      "name": "Data Structures",
+      "credits": 4,
+      "confidence": 3,
+      "strong_areas": ["Arrays", "Linked Lists"],
+      "weak_areas": ["Trees", "Graphs"]
+    }
+  ],
+  "weekday_hours": 3,
+  "weekend_hours": 6,
+  "preferred_time": "Night",
+  "target_date": "2026-03-15"
+}
+
+Sample Response
+{
+  "schedule": [
+    {
+      "subject": "Data Structures",
+      "weekly_hours": 13.5,
+      "topics": [
+        { "name": "Trees", "hours": 4.1, "level": "weak" },
+        { "name": "Graphs", "hours": 4.1, "level": "weak" },
+        { "name": "Arrays", "hours": 2.7, "level": "strong" }
+      ]
+    }
+  ]
+}
+
+▶️ How to Run Locally
+Backend
+cd backend
+pip install -r requirements.txt
+python -m uvicorn main:app --reload
+
+
+Open:
+
+http://127.0.0.1:8000/docs
+
+Frontend
+cd frontend
+npm install
+npm start
+
+
+Open:
+
+http://localhost:3000
+
+🎯 Use Case
+
+College students preparing for exams
+
+Competitive exam aspirants
+
+Anyone who wants a structured, weakness-focused study plan
+
+🔮 Future Enhancements
+
+📅 Calendar-based study schedule
+
+🔄 Confidence updates & plan regeneration
+
+📈 Progress tracking
+
+🎨 Improved UI with Tailwind CSS
+
+🔗 Authentication & user profiles
+
+🏁 Conclusion
+
+The AI Study Planner MVP demonstrates how intelligent scheduling can help students focus on what matters most — their weak areas — while maintaining balanced study coverage.
+
+This project serves as a strong foundation for a full-scale AI-based learning assistant.
